@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 
-export default function ElectionsDiv({setIsOPen,theKey,election}) {
+export default function ElectionsDiv({setIsOPen,theKey,election, setSelectedId}) {
   return (
-    <div class="stats shadow mt-4 bg-slate-700 w-3/4" onClick={()=>{setIsOPen(true)}} key = {theKey}>
+    <div class="stats shadow mt-4 bg-slate-700 w-3/4" onClick={()=>{setIsOPen(true); setSelectedId(theKey);}} key = {theKey}>
       <div class="stat">
         <div class="stat-title">Name</div>
         <div class="stat-value text-lime-50">{election[0]}</div>

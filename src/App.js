@@ -16,6 +16,7 @@ function App() {
   const [isOpen, setIsOPen] = useState(false);
   const [electionInfo, SetElectionInfo] = useState([]);
   const [electionCount, setElectionCount] = useState(0);
+  const [selectedID, setSelectedId] = useState(0);
 
   const loadBlockchainData = async ()=> {
     const provider = new ethers.BrowserProvider(window.ethereum);
@@ -44,16 +45,21 @@ function App() {
 
   return (
     <div >
-      <ShowModal isOpen={isOpen} setIsOPen = {setIsOPen}/>
+      <ShowModal isOpen={isOpen} setIsOPen = {setIsOPen} selectedID = {selectedID}/>
+
       <NavBar 
         userAddress = {userAddress} 
         setuserAddress = {setuserAddress}
-        setIsOPen = {setIsOPen} 
+        setIsOPen = {setIsOPen}
+        setSelectedId = {setSelectedId} 
       />
 
       <div className="flex flex-wrap justify-center mt-20">
       {electionInfo.map((election, index) => (
-            <ElectionsDiv setIsOPen = {setIsOPen} theKey= {index} election = {election}/>
+            <ElectionsDiv setIsOPen = {setIsOPen} 
+            theKey= {index} election = {election} 
+            setSelectedId = {setSelectedId}  
+            selectedId = {selectedID} />
         ))}
          
       </div>

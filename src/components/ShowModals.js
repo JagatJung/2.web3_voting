@@ -1,14 +1,19 @@
 import React from 'react'
 import NewElectionAdder from './modals/NewElectionAdder';
+import ElectionDescription from './modals/ElectionDescription';
 
-export default function ShowModal({ isOpen , setIsOPen }){
+export default function ShowModal({ isOpen , setIsOPen, selectedID }){
 
     if(!isOpen) {
         return null;
     }  
     return (
         <dialog id="my_modal_1" class="modal" open>
-            <NewElectionAdder setIsOPen = {setIsOPen}/>
+            {
+             (selectedID == 0) ? 
+             ( <NewElectionAdder setIsOPen = {setIsOPen}/> ) :
+             (<ElectionDescription setIsOPen = {setIsOPen} />)
+            }
         </dialog>
     );
   };

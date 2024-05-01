@@ -1,0 +1,310 @@
+[
+	{
+		"inputs": [],
+		"name": "counter",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "electionList",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "title",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "description",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "voteStartDate",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "creator",
+				"type": "address"
+			},
+			{
+				"internalType": "uint8",
+				"name": "validity",
+				"type": "uint8"
+			},
+			{
+				"internalType": "bool",
+				"name": "isActive",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getCount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_index",
+				"type": "uint256"
+			}
+		],
+		"name": "getElections",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "title",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "description",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "voteStartDate",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "creator",
+						"type": "address"
+					},
+					{
+						"internalType": "uint8",
+						"name": "validity",
+						"type": "uint8"
+					},
+					{
+						"internalType": "bool",
+						"name": "isActive",
+						"type": "bool"
+					},
+					{
+						"internalType": "string[]",
+						"name": "options",
+						"type": "string[]"
+					},
+					{
+						"components": [
+							{
+								"internalType": "address",
+								"name": "voter",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "votedDate",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "votedOption",
+								"type": "string"
+							}
+						],
+						"internalType": "struct Elections.Vote[]",
+						"name": "votedVotes",
+						"type": "tuple[]"
+					}
+				],
+				"internalType": "struct Elections.SingleElection",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_index",
+				"type": "uint256"
+			}
+		],
+		"name": "getOption",
+		"outputs": [
+			{
+				"internalType": "string[]",
+				"name": "",
+				"type": "string[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_index",
+				"type": "uint256"
+			}
+		],
+		"name": "getVotes",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "address",
+						"name": "voter",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "votedDate",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "votedOption",
+						"type": "string"
+					}
+				],
+				"internalType": "struct Elections.Vote[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_count",
+				"type": "uint256"
+			}
+		],
+		"name": "setCount",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_option",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_index",
+				"type": "uint256"
+			}
+		],
+		"name": "setOption",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_title",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_description",
+				"type": "string"
+			},
+			{
+				"internalType": "uint8",
+				"name": "_validity",
+				"type": "uint8"
+			},
+			{
+				"internalType": "address",
+				"name": "_creator",
+				"type": "address"
+			}
+		],
+		"name": "setSingleElection",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_voter",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "_option",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_index",
+				"type": "uint256"
+			}
+		],
+		"name": "setVotes",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "tempVote",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "voter",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "votedDate",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "votedOption",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]

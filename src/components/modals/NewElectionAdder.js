@@ -58,7 +58,7 @@ export default function NewElectionAdder({setIsOPen, SetElectionInfo, setElectio
 
         <div class="modal-action">
         <form method="dialog">
-        <button class="btn mr-3" onClick={()=>{setNewElectionObject()}}>Add</button>
+            <button class="btn mr-3 btn-primary" onClick={()=>{setNewElectionObject()}}>Add</button>
             <button class="btn btn-error" onClick={()=>{setIsOPen(false)}}>Cancel</button>
         </form>
         </div>

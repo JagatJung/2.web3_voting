@@ -12,7 +12,7 @@ export default function ShowModal({ isOpen , setIsOPen, selectedID }){
             {
              (selectedID == 0) ? 
              ( <NewElectionAdder setIsOPen = {setIsOPen}/> ) :
-             (<ElectionDescription setIsOPen = {setIsOPen} />)
+             (<ElectionDescription setIsOPen = {setIsOPen} selectedID = {selectedID} />)
             }
         </dialog>
     );

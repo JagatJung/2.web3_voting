@@ -17,10 +17,10 @@ contract Elections {
         string description;
         uint256 voteStartDate;
         address creator;
-        uint8 validity; // User can set date more than 20 days
+        uint8 validity; 
         bool isActive;
         string[] options;
-        Vote[] votedVotes; // Changed to an array of Vote structs
+        Vote[] votedVotes; 
     }
 
     mapping(uint256 => SingleElection) public electionList;

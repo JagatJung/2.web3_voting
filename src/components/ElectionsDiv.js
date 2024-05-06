@@ -1,6 +1,35 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 export default function ElectionsDiv({setIsOPen,theKey,election, setSelectedId}) {
+
+    const [highestVote, setHighestVote] = useState([])
+  const getHigestVote = () => {
+        let temp_array = [];
+        for (let i = 0 ; i < election[7].length; i++ ){
+            temp_array.push(election[7][i][2]);
+        }
+
+        const counts = {};
+        temp_array.forEach(element => {
+            counts[element] = (counts[element] || 0) + 1;
+        });
+
+        console.log(temp_array);
+
+        let maxElement;
+        let maxCount = 0;
+
+        for (let element in counts) {
+            if (counts[element] > maxCount) {
+                maxElement = element;
+                maxCount = counts[element];
+            }
+        }
+        setHighestVote({'el':maxElement, 'num':maxCount});
+  }
+  useEffect(()=>{
+    getHigestVote();
+  },[]) 
   return (
     <div class="stats shadow mt-4 bg-slate-700 w-3/4" onClick={()=>{setIsOPen(true); setSelectedId(theKey);}} key = {theKey}>
       <div class="stat">
@@ -22,8 +51,8 @@ export default function ElectionsDiv({setIsOPen,theKey,election, setSelectedId})
         <svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-8 h-8 stroke-current mt-5 mr-3" viewBox="0 0 256 256"><path fill="currentColor" d="M244 56v64a12 12 0 0 1-24 0V85l-75.51 75.52a12 12 0 0 1-17 0L96 129l-63.51 63.49a12 12 0 0 1-17-17l72-72a12 12 0 0 1 17 0L136 135l67-67h-35a12 12 0 0 1 0-24h64a12 12 0 0 1 12 12"/></svg>
         </div>
         <div class="stat-title">Highest Vote</div>
-        <div class="stat-value text-lime-50">223</div>
-        <div class="stat-desc text-secondary">Nepal</div>
+        <div class="stat-value text-lime-50">{highestVote['num']}</div>
+        <div class="stat-desc text-secondary">{election[6][highestVote['el']]}</div>
       </div>
   </div>
   )

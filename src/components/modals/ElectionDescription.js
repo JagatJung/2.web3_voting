@@ -4,9 +4,10 @@ import React from 'react'
 import { ethers } from 'ethers';
 import Elections from '../../abis/elections.json'
 
-export default function ElectionDescription({ setIsOPen, selectedID }) {
+export default function ElectionDescription({ setIsOPen, selectedID, setTotalVotes, totalVotes }) {
     const [currentElection, setCurrentElection] = useState([]);
     const [currentOptions, setCurrentOptions] = useState([]);
+
 
     const newOptionAdder = async () => {
         const provider = new ethers.BrowserProvider(window.ethereum);
@@ -52,11 +53,23 @@ export default function ElectionDescription({ setIsOPen, selectedID }) {
         const signer = await provider.getSigner();
         const contract1 = new ethers.Contract('0x5FbDB2315678afecb367f032d93F642f64180aa3', Elections, signer);
         let data3 = await contract1.getVotes(selectedID);
-        console.log(data3);
+        
+        let temp_array = [];
+        for (let i = 0 ; i < data3.length; i++ ){
+            temp_array.push(data3[i][2]);
+        }
+
+        const counts = {};
+        temp_array.forEach(element => {
+            counts[element] = (counts[element] || 0) + 1;
+        });
+
+        setTotalVotes(counts);
     }
 
     useEffect(()=>{
         newOptionAdder();
+        getVotes();
       },[currentElection]);
 
   return (
@@ -69,7 +82,7 @@ export default function ElectionDescription({ setIsOPen, selectedID }) {
                 
                     <div className="form-control py-2 shadow-lg bg-gray-700 px-3 mt-3 rounded-xl" key={index}>
                     <label className="label cursor-pointer">
-                        <span className="label-text">{option}</span> 
+                        <span className="label-text">  {option} ({totalVotes[index]})</span> 
                         <input type="radio" name="radio_options" className="radio radio-accent" value={index} />
                     </label>
                     </div>
@@ -79,12 +92,13 @@ export default function ElectionDescription({ setIsOPen, selectedID }) {
             <div className="form-control py-2 shadow-lg bg-gray-700 px-3 mt-3 rounded-xl">
             <label className="label cursor-pointer"> 
                 <span className="label-text"><input type="text" className=" bg-gray-700 text-white py-2 outline-none" placeholder="Add Option ..." id = 'newOption'/></span> 
-                <button class="btn btn-primary btn-sm" onClick={()=>{setOptionAdder()}}><span className='text-xl'>&#43;</span></button>
+                <button class="btn btn-primary btn-sm" onClick={()=>{setOptionAdder()}}><span className='text-xl'>&#43;</span></button> 
+                
             </label>
             </div>
 
             <div class="flex mt-4">
-                <button class="btn w-1/2 btn-success" onClick={()=>{ getVotes() }}>Vote</button> &nbsp;&nbsp;&nbsp;
+                <button class="btn w-1/2 btn-success" onClick={()=>{ VotedVote() }}>Vote</button> &nbsp;&nbsp;&nbsp;
                 <button class="btn w-1/2 btn-error" onClick={()=>{setIsOPen(false)}}>Cancel</button>
             </div>
         </div>

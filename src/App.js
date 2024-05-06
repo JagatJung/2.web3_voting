@@ -17,6 +17,7 @@ function App() {
   const [electionInfo, SetElectionInfo] = useState([]);
   const [electionCount, setElectionCount] = useState(0);
   const [selectedID, setSelectedId] = useState(0);
+  const [totalVotes, setTotalVotes] = useState([])
 
   const loadBlockchainData = async ()=> {
     const provider = new ethers.BrowserProvider(window.ethereum);
@@ -29,7 +30,6 @@ function App() {
       let data2 = await contract1.getElections(i);
       election_list.push(data2);
     }
-    // console.log(election_list);
     SetElectionInfo(election_list);
   }
 
@@ -41,11 +41,11 @@ function App() {
   
   useEffect(()=>{
     loadBlockchainData();
-  },[electionInfo]);
+  },[]);
 
   return (
     <div >
-      <ShowModal isOpen={isOpen} setIsOPen = {setIsOPen} selectedID = {selectedID}/>
+      <ShowModal isOpen={isOpen} setIsOPen = {setIsOPen} selectedID = {selectedID} setTotalVotes={ setTotalVotes } totalVotes= { totalVotes }/>
 
       <NavBar 
         userAddress = {userAddress} 
@@ -57,9 +57,11 @@ function App() {
       <div className="flex flex-wrap justify-center mt-20">
       {electionInfo.map((election, index) => (
             <ElectionsDiv setIsOPen = {setIsOPen} 
-            theKey= {index} election = {election} 
+            theKey= {index} 
+            election = {election} 
             setSelectedId = {setSelectedId}  
-            selectedId = {selectedID} />
+            selectedId = {selectedID} 
+            />
         ))}
          
       </div>

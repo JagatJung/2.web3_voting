@@ -2,7 +2,7 @@ import React from 'react'
 import NewElectionAdder from './modals/NewElectionAdder';
 import ElectionDescription from './modals/ElectionDescription';
 
-export default function ShowModal({ isOpen , setIsOPen, selectedID }){
+export default function ShowModal({ isOpen , setIsOPen, selectedID, setTotalVotes,  totalVotes }){
 
     if(!isOpen) {
         return null;
@@ -12,7 +12,7 @@ export default function ShowModal({ isOpen , setIsOPen, selectedID }){
             {
              (selectedID == 0) ? 
              ( <NewElectionAdder setIsOPen = {setIsOPen}/> ) :
-             (<ElectionDescription setIsOPen = {setIsOPen} selectedID = {selectedID} />)
+             (<ElectionDescription setIsOPen = {setIsOPen} selectedID = {selectedID} setTotalVotes={ setTotalVotes } totalVotes= { totalVotes } />)
             }
         </dialog>
     );

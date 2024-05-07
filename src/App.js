@@ -30,6 +30,7 @@ function App() {
       let data2 = await contract1.getElections(i);
       election_list.push(data2);
     }
+    console.log(election_list)
     SetElectionInfo(election_list);
   }
 
@@ -45,7 +46,7 @@ function App() {
 
   return (
     <div >
-      <ShowModal isOpen={isOpen} setIsOPen = {setIsOPen} selectedID = {selectedID} setTotalVotes={ setTotalVotes } totalVotes= { totalVotes }/>
+      <ShowModal isOpen={isOpen} setIsOPen = {setIsOPen} selectedID = {selectedID} setTotalVotes={ setTotalVotes } totalVotes= { totalVotes } userAddress = {userAddress} />
 
       <NavBar 
         userAddress = {userAddress} 

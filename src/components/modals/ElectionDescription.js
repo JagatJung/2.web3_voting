@@ -75,7 +75,7 @@ export default function ElectionDescription({ setIsOPen, selectedID, setTotalVot
   return (
     <div class="modal-box w-full">
         <div className='p-5'>
-            <h2 class="font-bold text-lg">{currentElection[0]} sadasd</h2>
+            <h2 class="font-bold text-lg">{currentElection[0]}</h2>
             <p> {currentElection[1]}</p>
 
             {currentOptions.map((option, index) => (

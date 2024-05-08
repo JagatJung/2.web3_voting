@@ -4,6 +4,7 @@ export default function ElectionsDiv({setIsOPen,theKey,election, setSelectedId})
 
     const [highestVote, setHighestVote] = useState([])
   const getHigestVote = () => {
+    
         let temp_array = [];
         for (let i = 0 ; i < election[7].length; i++ ){
             temp_array.push(election[7][i][2]);

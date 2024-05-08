@@ -4,7 +4,7 @@ import React from 'react'
 import { ethers } from 'ethers';
 import Elections from '../../abis/elections.json'
 
-export default function ElectionDescription({ setIsOPen, selectedID, setTotalVotes, totalVotes }) {
+export default function ElectionDescription({ setIsOPen, selectedID, setTotalVotes, totalVotes, userAddress }) {
     const [currentElection, setCurrentElection] = useState([]);
     const [currentOptions, setCurrentOptions] = useState([]);
 
@@ -21,10 +21,15 @@ export default function ElectionDescription({ setIsOPen, selectedID, setTotalVot
     }
 
     const setOptionAdder = async ()=> {
+        const newoption = document.getElementById('newOption').value;
+        if(newoption == '') {
+            alert('option is empty');
+            return 0;
+        }
         const provide_new = new ethers.JsonRpcProvider("http://127.0.0.1:8545");
         const signer1 = await provide_new.getSigner();
         const contract2 = new ethers.Contract('0x5FbDB2315678afecb367f032d93F642f64180aa3', Elections, signer1);
-        const newoption = document.getElementById('newOption').value;
+        
         const waitOption = await contract2.setOption(newoption, selectedID);
         await waitOption.wait();
     }
@@ -39,12 +44,15 @@ export default function ElectionDescription({ setIsOPen, selectedID, setTotalVot
             }
         }
 
-        const provide_new = new ethers.JsonRpcProvider("http://127.0.0.1:8545");
-        const signer1 = await provide_new.getSigner();
-        const contract2 = new ethers.Contract('0x5FbDB2315678afecb367f032d93F642f64180aa3', Elections, signer1);
-        const waitOption = await contract2.setVotes('0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65',   selectedValue,  selectedID);
-        await waitOption.wait();
-
+        if (selectedValue == '') {
+            alert('no option has been selected');
+        } else {
+            const provide_new = new ethers.JsonRpcProvider("http://127.0.0.1:8545");
+            const signer1 = await provide_new.getSigner();
+            const contract2 = new ethers.Contract('0x5FbDB2315678afecb367f032d93F642f64180aa3', Elections, signer1);
+            const waitOption = await contract2.setVotes('0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65',   selectedValue,  selectedID);
+            await waitOption.wait();
+        }
     }
 
     const getVotes = async() => {
@@ -92,13 +100,13 @@ export default function ElectionDescription({ setIsOPen, selectedID, setTotalVot
             <div className="form-control py-2 shadow-lg bg-gray-700 px-3 mt-3 rounded-xl">
             <label className="label cursor-pointer"> 
                 <span className="label-text"><input type="text" className=" bg-gray-700 text-white py-2 outline-none" placeholder="Add Option ..." id = 'newOption'/></span> 
-                <button class="btn btn-primary btn-sm" onClick={()=>{setOptionAdder()}}><span className='text-xl'>&#43;</span></button> 
+                <button class="btn btn-primary btn-sm" onClick={()=>{setOptionAdder()}} disabled={!userAddress}><span className='text-xl'>&#43;</span></button> 
                 
             </label>
             </div>
 
             <div class="flex mt-4">
-                <button class="btn w-1/2 btn-success" onClick={()=>{ VotedVote() }}>Vote</button> &nbsp;&nbsp;&nbsp;
+                <button class="btn w-1/2 btn-success" onClick={()=>{ VotedVote()}} disabled={!userAddress}>Vote</button> &nbsp;&nbsp;&nbsp;
                 <button class="btn w-1/2 btn-error" onClick={()=>{setIsOPen(false)}}>Cancel</button>
             </div>
         </div>

@@ -12,7 +12,7 @@ import ShowModal from './components/ShowModals';
 
 
 function App() {
-  const [userAddress, setuserAddress] = useState(null);
+  const [userAddress, setuserAddress] = useState('');
   const [isOpen, setIsOPen] = useState(false);
   const [electionInfo, SetElectionInfo] = useState([]);
   const [electionCount, setElectionCount] = useState(0);
@@ -57,12 +57,13 @@ function App() {
 
       <div className="flex flex-wrap justify-center mt-20">
       {electionInfo.map((election, index) => (
+            election[5] ? (
             <ElectionsDiv setIsOPen = {setIsOPen} 
             theKey= {index} 
             election = {election} 
             setSelectedId = {setSelectedId}  
             selectedId = {selectedID} 
-            />
+            />) : ''
         ))}
          
       </div>

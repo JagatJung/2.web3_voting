@@ -26,13 +26,25 @@ contract Elections {
     mapping(uint256 => SingleElection) public electionList;
 
     function setSingleElection(string memory _title, string memory _description, uint8 _validity, address _creator) public{
-        counter++;
-        electionList[counter].title = _title;
-        electionList[counter].description = _description;
-        electionList[counter].voteStartDate = block.timestamp;
-        electionList[counter].creator = _creator;
-        electionList[counter].validity = _validity;
-        electionList[counter].isActive = true;
+        if(counter == 0) {
+            electionList[counter].title = _title;
+            electionList[counter].description = _description;
+            electionList[counter].voteStartDate = block.timestamp;
+            electionList[counter].creator = _creator;
+            electionList[counter].validity = _validity;
+            electionList[counter].isActive = false;
+            counter++;
+            setSingleElection(_title, _description, _validity, _creator);
+        } else {
+            electionList[counter].title = _title;
+            electionList[counter].description = _description;
+            electionList[counter].voteStartDate = block.timestamp;
+            electionList[counter].creator = _creator;
+            electionList[counter].validity = _validity;
+            electionList[counter].isActive = true;
+            counter++;
+        }
+
     }
 
     //options for a single elections goes here

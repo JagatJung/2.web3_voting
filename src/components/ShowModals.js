@@ -12,7 +12,7 @@ export default function ShowModal({ isOpen , setIsOPen, selectedID, setTotalVote
             {
              (selectedID == 0) ? 
              ( <NewElectionAdder setIsOPen = {setIsOPen} userAddress = {userAddress}/> ) :
-             (<ElectionDescription setIsOPen = {setIsOPen} selectedID = {selectedID} setTotalVotes={ setTotalVotes } totalVotes= { totalVotes } />)
+             (<ElectionDescription setIsOPen = {setIsOPen} selectedID = {selectedID} setTotalVotes={ setTotalVotes } totalVotes= { totalVotes } userAddress = {userAddress}/>)
             }
         </dialog>
     );
